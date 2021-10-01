@@ -1,0 +1,129 @@
+\documentclass{pgnotes}
+
+\title{AWS account setup}
+
+\begin{document}
+
+\maketitle
+
+Many of the labs in this course will use Amazon Web Services, or AWS.
+(Other cloud providers too - IBM, Google, Azure, others - this is not an endorsement of Amazon.
+Most of the ideas translate to the others.)
+To do the labs in this course, you will need an AWS account.
+
+Almost all AWS services are chargeable.
+Many services have a time-limited free tier.
+AWS Academy has a number of resources including free credits so that labs exceeding the free tier don't incur charges.
+
+
+\section{AWS account setup}
+\label{sec:aws-account-setup}
+
+You will get a sign-up email for AWS Academy Learner Labs.
+Go ahead and create the account.
+
+\section{AWS account usage}
+
+Login to your account at:\\
+\url{https://awsacademy.instructure.com/courses/8294/modules/items/794040}
+
+\subsection{AWS Console access}
+
+Click the AWS link on the left to be taken to the AWS console. 
+
+\subsection{Cloud Shell}
+
+You can access the AWS CLI running on Bash on Linux directly from the AWS console. There are a few extra tools like \texttt{git} installed on this environment.
+
+
+\section{Setup AWS command-line interface}
+
+The AWS Command Line Interface is a client program that runs on your local PC to allow you to manage AWS resources from the command-line (PowerShell, Bash).
+We will use the command-line extensively in this module.
+
+\subsection{PowerShell execution policy}
+
+PowerShell by default will not allow scripts to run that were downloaded from online.
+The following command will change this behaviour: 
+\begin{verbatim}
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+\end{verbatim}
+
+\subsection{AWS CLI installation}
+
+If you're on a lab computer OR if you already have the AWS CLI installed, then skip ahead to \autoref{sec:access-key-setup}.
+
+Install the command-line tools from \url{https://aws.amazon.com/cli/}
+
+\subsection{Config file setup}
+\label{sec:config-file-setup}
+
+There is a script file \texttt{setup\_config\_file.ps1} that will setup your configuration file for you.
+Run it once.
+
+\subsection{Access key setup}
+\label{sec:access-key-setup}
+
+\textbf{Needs to be done EVERY time you log in on a student account!}
+
+Log in to AWS academy.
+Go to \url{https://awsacademy.instructure.com/courses/8294/modules/items/794040}.
+
+Hit the \textit{AWS Details} button.
+Look for \textit{Cloud Access} and \textit{AWS CLI} on the right.
+Click \textit{Show}.
+Copy this.
+
+\subsubsection{PowerShell}
+
+\begin{verbatim}
+Get-Clipboard | Out-File ~/.aws/credentials
+\end{verbatim}
+
+\subsubsection{Manual alternative}
+
+Paste the contents into a file named EXACTLY 
+\begin{verbatim}
+C:\Users\yourusername\.aws\credentials
+\end{verbatim}
+(no \texttt{.txt} etc at the end). 
+
+\subsection{Check CLI configured}
+
+To check that the AWS CLI is correctly configured, you can try running the command:
+\begin{verbatim}
+aws ec2 describe-instances
+\end{verbatim}
+If it shows something similar to:
+\begin{verbatim}
+{
+    "Reservations": []
+}
+\end{verbatim}
+then the AWS CLI is working OK.
+
+\section{Mac, Linux, UNIX users}
+
+\textit{Windows users can ignore this section.}
+
+Mac, Linux, Unix users will have no problems installing the AWS CLI, and the commands work identically to those on Windows.
+
+The difference between Mac/Linux and Windows centres on the use of Bash/zsh by Mac/Linux/UNIX vs PowerShell on Windows.
+The AWS CLI is perfectly scriptable using Bash, particularly in conjunction with \texttt{jq} to parse JSON.
+However, some of the scripts you will be provided with in this module will be PowerShell only due to time constraints.
+
+The good news is that PowerShell Core 7 can be installed easily on a Mac with no issues.
+You \textit{do not} need a Windows VM on your Mac to use any of the PowerShell or AWS commands in \textit{this} course.
+Please go to the \href{https://github.com/PowerShell/PowerShell}{PowerShell page on GitHub} for instructions.
+
+When you have PowerShell installed, open the Terminal app and type \texttt{pwsh} and you'll be at a PowerShell prompt.
+Repeat the \texttt{aws ec2 describe-instances} command to confirm that the \texttt{aws} command is available in PowerShell. 
+
+\section{Check script}
+
+Run the \texttt{lab\_checks.ps1} powershell script to confirm that your environment is set up correctly. 
+
+
+\end{document}
+
+
