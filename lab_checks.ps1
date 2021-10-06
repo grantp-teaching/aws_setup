@@ -10,7 +10,7 @@ if ( Test-Path $path ) {
     Write-Host "$path exists"
 }
 else {
-    Write-Host "$path does not exist" 
+    Write-Host "$path does not exist" -ForegroundColor Red
     Write-Host " ... fix this error and re-run"
     Return
     }
@@ -26,10 +26,10 @@ if ( "HostReservationSet" -in ($output | ConvertFrom-Json).PSObject.Properties.N
     }
     else
     {
-    Write-Host "aws CLI not working, fix and re-run"
+    Write-Host "aws CLI not working, fix and re-run" -ForegroundColor Red
     Return
     }
 
 # confirmation screen
-Write-Host "You have completed AWS setup lab"
+Write-Host "You have completed AWS setup lab" -ForegroundColor Green
 
